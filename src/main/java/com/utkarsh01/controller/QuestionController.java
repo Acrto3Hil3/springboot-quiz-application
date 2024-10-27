@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.utkarsh01.entity.Question;
 import com.utkarsh01.service.QuestionService;
 
-@Controller
+@RestController
 @RequestMapping("/question")
 public class QuestionController {
 	
@@ -32,5 +35,10 @@ public class QuestionController {
 	@PostMapping("/category/{category}")
 	public List<Question> getQuestionByCategory(@PathVariable("category") String category){
 		return service.getAllQuestionByCategories(category);
+	}
+	
+	@PostMapping("/add")
+	public String addQuestion(@RequestBody Question ques) {
+		return service.addQues(ques);
 	}
 }
